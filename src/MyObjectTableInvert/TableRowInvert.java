@@ -206,9 +206,10 @@ public class TableRowInvert extends TableRow implements KeyListener, ItemListene
         if (c instanceof JLabel) {
             JLabel label = (JLabel) c;
             return label.getText();
-        } else if (c instanceof JComboBox) {
-            JComboBox comboBox = (JComboBox) c;
-            return HelpA.getComboBoxSelectedValue(comboBox);
+        } else if (c instanceof JComboBoxInvert) {
+            JComboBoxInvert comboBox = (JComboBoxInvert) c;
+//            return HelpA.getComboBoxSelectedValue(comboBox);
+            return comboBox.getComboBoxSelectedValue();
         } else if (c instanceof JTextFieldF) {
             JTextFieldF jtf = (JTextFieldF) c;
             return jtf.getRealValue();

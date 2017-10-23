@@ -424,8 +424,10 @@ public class HelpA {
         "MM/dd/yyyy'T'HH:mm:ss.SSSZ", "MM/dd/yyyy'T'HH:mm:ss.SSS",
         "MM/dd/yyyy'T'HH:mm:ssZ", "MM/dd/yyyy'T'HH:mm:ss",
         "yyyy:MM:dd HH:mm:ss",
-        "yyyy-MM-dd", "yyyy:MM:dd", "yyyyMMdd",
-        "dd/MM/yy", "dd/MM/yyyy", "dd-MM-yy", "dd-MM-yyyy",
+        "yyyy-MM-dd", "yyyy:MM:dd",
+//        "yyyyMMdd",
+        "dd/MM/yy",
+        "dd/MM/yyyy", "dd-MM-yy", "dd-MM-yyyy",
         "dd:MM:yy", "dd:MM:yyyy"};
 
     public static long dateToMillisConverter3(String date, String date_format) {

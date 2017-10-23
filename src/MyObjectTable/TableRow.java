@@ -4,6 +4,7 @@
  */
 package MyObjectTable;
 
+import MyObjectTableInvert.JComboBoxInvert;
 import supplementary.HelpA;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -148,9 +149,10 @@ public class TableRow extends JPanel implements MouseListener, AncestorListener,
         if (c instanceof JLabel) {
             JLabel label = (JLabel) c;
             return label.getText();
-        } else if (c instanceof JComboBox) {
-            JComboBox comboBox = (JComboBox) c;
-            return HelpA.getComboBoxSelectedValue(comboBox);
+        } else if (c instanceof JComboBoxInvert) {
+            JComboBoxInvert comboBox = (JComboBoxInvert) c;
+//            return HelpA.getComboBoxSelectedValue(comboBox);
+            return comboBox.getComboBoxSelectedValue();
         } else if (c instanceof JTextField) {
             JTextField jtf = (JTextField) c;
             return (String) jtf.getText();

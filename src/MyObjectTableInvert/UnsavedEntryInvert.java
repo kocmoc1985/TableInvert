@@ -11,6 +11,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import mySwing.JComboBoxA;
 
 /**
  *
@@ -58,9 +59,10 @@ public class UnsavedEntryInvert {
             JTextField jtf = (JTextField) dataField;
             jtf.setForeground(Color.red);
             this.value = jtf.getText();
-        } else if (dataField instanceof JComboBox) {
-            JComboBox comboBox = (JComboBox) dataField;
-            this.value = HelpA.getComboBoxSelectedValue(comboBox);
+        } else if (dataField instanceof JComboBoxInvert) {
+            JComboBoxInvert comboBox = (JComboBoxInvert) dataField;
+            this.value = comboBox.getComboBoxSelectedValue();
+//            this.value = HelpA.getComboBoxSelectedValue(comboBox);
             comboBox.setBorder(BorderFactory.createLineBorder(Color.red,2));
         }
     }

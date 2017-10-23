@@ -39,9 +39,10 @@ public class ColumnValue {
         if (value instanceof JLabel) {
             JLabel label = (JLabel) value;
             return label.getText();
-        } else if (value instanceof JComboBox) {
-            JComboBox comboBox = (JComboBox) value;
-            return HelpA.getComboBoxSelectedValue(comboBox);
+        } else if (value instanceof JComboBoxInvert) {
+            JComboBoxInvert comboBox = (JComboBoxInvert) value;
+//            return HelpA.getComboBoxSelectedValue(comboBox);
+            return comboBox.getComboBoxSelectedValue();
         } else if (value instanceof JTextField) {
             JTextField jtf = (JTextField) value;
             return (String) jtf.getText();
