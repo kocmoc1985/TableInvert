@@ -21,6 +21,8 @@ import java.awt.GridLayout;
 import java.awt.event.ComponentEvent;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -35,6 +37,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import supplementary.HelpA;
+import supplementary.SqlBasicLocal;
 
 /**
  *
@@ -348,7 +351,7 @@ public  class TableInvert extends Table implements ControlsActionsIF {
                 UpdateBefore.updateBefore(unsavedEntryInvert, getSql(), updateOtherTablesBeforeInstruction);
             }
 
-            String q_string = updateFieldString(
+            updateFieldString(
                     unsavedEntryInvert.getTableName(),
                     unsavedEntryInvert.getColumnName(),
                     unsavedEntryInvert.getValue(),
@@ -356,12 +359,9 @@ public  class TableInvert extends Table implements ControlsActionsIF {
                     unsavedEntryInvert.getDbID(),
                     unsavedEntryInvert.isString(),
                     unsavedEntryInvert.keyIsString());
-
-            System.out.println("TABLE_INVERT_SAVE_Q: " + q_string);
-
-
+            //
             try {
-                getSql().update(q_string);
+                //
                 Component c = (Component) unsavedEntryInvert.getDataField();
                 c.setForeground(Color.green);
                 //
@@ -379,31 +379,51 @@ public  class TableInvert extends Table implements ControlsActionsIF {
         //
     }
 
-    private String updateFieldString(String tableName,
+    private void updateFieldString(String tableName,
             String columnName,
             String value,
             String keyName,
             String db_id,
             boolean isString,
             boolean keyIsString) {
-
-        if (keyIsString) {
-            if (db_id.contains("'") == false) {
-                String db_id_temp = "'" + db_id + "'";
-                db_id = db_id_temp;
+        //
+        try {
+            //
+            SqlBasicLocal sql = getSql();
+            //
+            sql.prepareStatement("UPDATE " + tableName
+                    + " SET [" + columnName + "]=" + "?" + ""
+                    + " WHERE " + keyName + "=" + "?" + "");
+            //
+            String dateFormat = HelpA.define_date_format(value);
+            //
+            if (dateFormat != null) {
+                long millis = HelpA.dateToMillisConverter3(value, dateFormat);
+                Timestamp timestamp = new Timestamp(millis);
+                sql.getPreparedStatement().setTimestamp(1, timestamp);
+            } else {
+                if (isString) {
+                    sql.getPreparedStatement().setString(1, value);
+                } else {
+                    sql.getPreparedStatement().setInt(1, Integer.parseInt(value));
+                }
             }
+            //
+            if (keyIsString) {
+                sql.getPreparedStatement().setString(2, db_id);
+            } else {
+                sql.getPreparedStatement().setInt(2, Integer.parseInt(db_id));
+            }
+            //
+            sql.getPreparedStatement().executeUpdate();
+            //
+        } catch (SQLException ex) {
+            Logger.getLogger(TableInvert.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if (isString) {
-            if (value.contains("'") == false) {
-                String value_temp = "'" + value + "'";
-                value = value_temp;
-            }
-        }
-
-        return "UPDATE " + tableName
-                + " SET [" + columnName + "]=" + value + ""
-                + " WHERE " + keyName + "=" + db_id + "";
+//        return "UPDATE " + tableName
+//                + " SET [" + columnName + "]=" + value + ""
+//                + " WHERE " + keyName + "=" + db_id + "";
 
     }
 

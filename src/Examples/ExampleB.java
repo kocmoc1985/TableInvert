@@ -66,10 +66,16 @@ public class ExampleB implements TableInvertUser {
         Sql_B sql_b = (Sql_B) sql;
         //
         try {
-            sql_b.connect_tds("10.87.0.2", "1433", "MILLS", "opc", "kocmoc", false, null, null);
+            sql_b.connect_mdb("", "", "example.mdb");
         } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(ExampleB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ExampleC.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //
+//        try {
+//            sql_b.connect_tds("10.87.0.2", "1433", "MILLS", "opc", "kocmoc", false, null, null);
+//        } catch (SQLException | ClassNotFoundException ex) {
+//            Logger.getLogger(ExampleC.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     @Override
@@ -107,7 +113,10 @@ public class ExampleB implements TableInvertUser {
         line.enableComboBoxMultipleValue();
         line.setUneditable();
         //
-        RowDataInvert[] rows = {order,recipe, duration,recipe2, line};
+        RowDataInvert updated_on = new RowDataInvert("main_table", "batch_id", false, "UpdatedOn", "UPDATED ON", "", true, true, false);
+        RowDataInvert updated_by = new RowDataInvert("main_table", "batch_id", false, "UpdatedBy", "UPDATED BY", "", true, true, false);
+        //
+        RowDataInvert[] rows = {order,recipe, duration,recipe2, line,updated_on,updated_by};
         //
         return rows;
     }

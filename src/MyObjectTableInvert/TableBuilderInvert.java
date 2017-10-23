@@ -5,8 +5,6 @@
  */
 package MyObjectTableInvert;
 
-import MyObjectTable.ShowMessage;
-import MyObjectTable.Table;
 import MyObjectTable.TableData;
 import MyObjectTable.TableRow;
 import supplementary.HelpA;
@@ -16,7 +14,6 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
-import supplementary.Sql_B;
 
 /**
  *
@@ -38,7 +35,7 @@ public class TableBuilderInvert {
     
     public TableInvert buildTable(String query) throws SQLException {
         //
-        ResultSet rs = sql.execute2(query);
+        ResultSet rs = sql.execute_2(query);
         //
         TableData tableData = new TableData();
         //

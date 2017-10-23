@@ -239,18 +239,22 @@ public class Sql_B implements SqlBasicLocal {
 
     }
 
+    @Override
     public PreparedStatement prepareStatementB(String q) throws SQLException {
         return connection.prepareStatement(q);
     }
 
+    @Override
     public void prepareStatement(String q) throws SQLException {
         p_statement = connection.prepareStatement(q);
     }
 
+    @Override
     public PreparedStatement getPreparedStatement() {
         return p_statement;
     }
 
+    @Override
     public int executeUpdatePreparedStatement() throws SQLException {
         return p_statement.executeUpdate();
     }
@@ -263,6 +267,7 @@ public class Sql_B implements SqlBasicLocal {
         }
     }
     
+    @Override
     public ResultSet execute(String sql, ShowMessage sm) throws SQLException {
         sm.showMessage(sql);
         //
@@ -280,9 +285,9 @@ public class Sql_B implements SqlBasicLocal {
         }
         return null;
     }
-
+    
     @Override
-    public synchronized ResultSet execute2(String sql) throws SQLException {
+    public synchronized ResultSet execute_2(String sql) throws SQLException {
         if (statement_2.execute(sql)) {
             return statement_2.getResultSet();
         }
@@ -298,6 +303,8 @@ public class Sql_B implements SqlBasicLocal {
         statement.close();
         connection.close();
     }
+
+    
 }
 
 
