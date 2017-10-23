@@ -15,7 +15,7 @@ import javax.swing.JButton;
 public class JButtonSave implements ActionListener {
 
     private JButton button;
-    private TableInvert tableInvert;
+    public TableInvert tableInvert;
 
     public JButtonSave(JButton btn,TableInvert ti) {
         this.button = btn;

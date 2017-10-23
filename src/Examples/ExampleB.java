@@ -5,6 +5,7 @@
 package Examples;
 
 import MyObjectTableInvert.JButtonSave;
+import MyObjectTableInvert.JButtonSaveB;
 import MyObjectTableInvert.TableInvertUser;
 import MyObjectTableInvert.RowDataInvert;
 import MyObjectTableInvert.SaveIndicator;
@@ -15,9 +16,10 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
+import sql.SqlBasicLocal;
+import supplementary.GP;
 import supplementary.HelpA;
 import supplementary.SQL_Q;
-import supplementary.SqlBasicLocal;
 import supplementary.Sql_B;
 
 /**
@@ -30,14 +32,14 @@ public class ExampleB implements TableInvertUser {
     private TableInvert TABLE_INVERT;
     private JComponent TABLE_INVERT_CONTAINER;
     private SqlBasicLocal sql;
-    private JButtonSave SAVE_BTN;
+    private JButtonSaveB SAVE_BTN;
 
     public ExampleB() {
         build();
     }
 
     private void build() {
-        HelpA.TRACKING_TOOL_TIP = true;
+        GP.TRACKING_TOOL_TIP = false;
         //
         final ExampleForm ef = new ExampleForm();
         ef.setVisible(true);
@@ -51,7 +53,7 @@ public class ExampleB implements TableInvertUser {
             public void run() {
                 showTableInvert();
                 //
-                SAVE_BTN = new JButtonSave(ef.jButton1, TABLE_INVERT);
+                SAVE_BTN = new JButtonSaveB(ef.jButton1, TABLE_INVERT);
                 //
                 initializeSaveIndicators();
             }
@@ -97,16 +99,12 @@ public class ExampleB implements TableInvertUser {
         //Show 1 parameter in a "JTextFiel"
         RowDataInvert order = new RowDataInvert("main_table", "batch_id", false, "order_id", "ORDER", "", true, true, false);
         //
-        String q_4 = SQL_Q.basic_combobox_query("recipe_id", "main_table");
-        RowDataInvert recipe = new RowDataInvert(RowDataInvert.TYPE_JCOMBOBOX, q_4, sql, "", "main_table", "batch_id", false, "recipe_id", "RECIPE", "", true, true, false);
-        //
         RowDataInvert duration = new RowDataInvert("main_table", "batch_id", false, "duration", "DURATION", "", true, true, false);
         duration.enableToolTipTextJTextField();
         duration.enableFakeValue();
         //
         String q_6 = SQL_Q.basic_combobox_query("recipe_id", "main_table");
         RowDataInvert recipe2 = new RowDataInvert(RowDataInvert.TYPE_JCOMBOBOX, q_6, sql, "", "main_table", "batch_id", false, "recipe_id", "RECIPE", "", true, true, false);
-        recipe2.enableFakeValue();
         //
         String q_5 = SQL_Q.basic_combobox_query_double_param("recipe_id", "batch_id", "main_table");
         RowDataInvert line = new RowDataInvert(RowDataInvert.TYPE_JCOMBOBOX, q_5, sql, "", "main_table", "batch_id", false, "line_nr", "LINE", "", true, true, false);
@@ -115,8 +113,10 @@ public class ExampleB implements TableInvertUser {
         //
         RowDataInvert updated_on = new RowDataInvert("main_table", "batch_id", false, "UpdatedOn", "UPDATED ON", "", true, true, false);
         RowDataInvert updated_by = new RowDataInvert("main_table", "batch_id", false, "UpdatedBy", "UPDATED BY", "", true, true, false);
+        updated_on.setUneditable();
+        updated_by.setUneditable();
         //
-        RowDataInvert[] rows = {order,recipe, duration,recipe2, line,updated_on,updated_by};
+        RowDataInvert[] rows = {order,recipe2, duration, line,updated_on,updated_by};
         //
         return rows;
     }

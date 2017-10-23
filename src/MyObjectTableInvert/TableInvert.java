@@ -36,8 +36,8 @@ import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import sql.SqlBasicLocal;
 import supplementary.HelpA;
-import supplementary.SqlBasicLocal;
 
 /**
  *

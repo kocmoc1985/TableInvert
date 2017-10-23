@@ -14,8 +14,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
+import sql.SqlBasicLocal;
 import supplementary.HelpA;
-import supplementary.SqlBasicLocal;
 import supplementary.Sql_B;
 
 /**

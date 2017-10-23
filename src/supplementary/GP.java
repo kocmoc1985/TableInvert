@@ -13,6 +13,8 @@ import java.util.Properties;
  */
 public class GP {
 
+    public static boolean TRACKING_TOOL_TIP = false;
+    
     public static final URL IMAGE_ICON_URL = GP.class.getResource("icon.png");
     public static final URL IMAGE_ICON_URL_RECIPE = GP.class.getResource("icon2.png");
     public static final URL IMAGE_ICON_URL_PROD_PLAN = GP.class.getResource("icon3.png");

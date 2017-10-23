@@ -8,12 +8,12 @@ package MyObjectTableInvert;
 import MyObjectTable.TableData;
 import MyObjectTable.TableRow;
 import supplementary.HelpA;
-import supplementary.SqlBasicLocal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
+import sql.SqlBasicLocal;
 
 /**
  *

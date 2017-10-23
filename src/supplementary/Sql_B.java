@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import sql.SqlBasicLocal;
 
 /**
  *
@@ -267,7 +268,7 @@ public class Sql_B implements SqlBasicLocal {
         }
     }
     
-    @Override
+//    @Override
     public ResultSet execute(String sql, ShowMessage sm) throws SQLException {
         sm.showMessage(sql);
         //
@@ -302,6 +303,11 @@ public class Sql_B implements SqlBasicLocal {
     public void close() throws SQLException {
         statement.close();
         connection.close();
+    }
+
+    @Override
+    public ResultSet execute(String string, other.ShowMessage sm) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     

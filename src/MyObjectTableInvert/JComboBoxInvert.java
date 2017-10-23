@@ -4,7 +4,7 @@
  */
 package MyObjectTableInvert;
 
-import javax.swing.JComboBox;
+import mySwing.JComboBoxA;
 
 
 /**
@@ -13,7 +13,11 @@ import javax.swing.JComboBox;
  *
  * @author KOCMOC
  */
-public class JComboBoxInvert extends JComboBox {
+public class JComboBoxInvert extends JComboBoxA {
 
+    public JComboBoxInvert(boolean trackinToolTip) {
+        super(trackinToolTip);
+    }
+ 
   
 }

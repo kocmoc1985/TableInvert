@@ -17,8 +17,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import sql.SqlBasicLocal;
 import supplementary.HelpA;
-import supplementary.SqlBasicLocal;
 
 /**
  *

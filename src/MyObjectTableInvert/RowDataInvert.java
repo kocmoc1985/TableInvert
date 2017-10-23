@@ -8,8 +8,9 @@ package MyObjectTableInvert;
 import MyObjectTable.RowData;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import sql.SqlBasicLocal;
+import supplementary.GP;
 import supplementary.HelpA;
-import supplementary.SqlBasicLocal;
 
 /**
  *
@@ -106,8 +107,7 @@ public class RowDataInvert extends RowData {
             Object unit,
             boolean string,
             boolean visible,
-            boolean important
-            ) {
+            boolean important) {
         //
         this.type = type;
         this.additionalInfo = additionalInfo;
@@ -125,9 +125,9 @@ public class RowDataInvert extends RowData {
         this.important = important;
     }
 
-   public void enableJComboAutoFill(){
-       this.jComboAutoFill = true;
-   }
+    public void enableJComboAutoFill() {
+        this.jComboAutoFill = true;
+    }
 
     public void enableFakeValue() {
         fakeValue = true;
@@ -172,7 +172,7 @@ public class RowDataInvert extends RowData {
     public Object getSpecialComponent(Object value) {
         //
         if (type == TYPE_JCOMBOBOX) {
-            JComboBoxInvert jcb = new JComboBoxInvert();
+            JComboBoxInvert jcb = new JComboBoxInvert(GP.TRACKING_TOOL_TIP);
 
             HelpA.addMouseListenerJComboBox(jcb, new MouseAdapter() {
                 @Override
@@ -182,11 +182,14 @@ public class RowDataInvert extends RowData {
             });
 
             if (comboBoxMultipleValue) {
-                jcb = (JComboBoxInvert) HelpA.fillComboBox(sql, jcb, additionalInfo, value, true, false,jComboAutoFill);
+//                jcb = (JComboBoxInvert) HelpA.fillComboBox(sql, jcb, additionalInfo, value, true, false,jComboAutoFill);
+                jcb.fillComboBox(sql, jcb, additionalInfo, value, true, false);
             } else if (fakeValue) {
-                jcb = (JComboBoxInvert) HelpA.fillComboBox(sql, jcb, additionalInfo, value, false, true,jComboAutoFill);
+                jcb.fillComboBox(sql, jcb, additionalInfo, value, false, true);
+//                jcb = (JComboBoxInvert) HelpA.fillComboBox(sql, jcb, additionalInfo, value, false, true,jComboAutoFill);
             } else {
-                jcb = (JComboBoxInvert) HelpA.fillComboBox(sql, jcb, additionalInfo, value, false, false,jComboAutoFill);
+                jcb.fillComboBox(sql, jcb, additionalInfo, value, false, false);
+//                jcb = (JComboBoxInvert) HelpA.fillComboBox(sql, jcb, additionalInfo, value, false, false,jComboAutoFill);
 //                jcb = (JComboBoxInvert)HelpA.fillComboBox_no_autofill(sql, jcb, additionalInfo, value);
             }
             //

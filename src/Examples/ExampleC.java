@@ -15,10 +15,11 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
+import sql.SqlBasicLocal;
+import supplementary.GP;
 import supplementary.HelpA;
 import supplementary.JPanelImg;
 import supplementary.SQL_Q;
-import supplementary.SqlBasicLocal;
 import supplementary.Sql_B;
 
 /**
@@ -54,7 +55,7 @@ public class ExampleC implements TableInvertUser, TableRowInvertListener {
     }
 
     private void build() {
-        HelpA.TRACKING_TOOL_TIP = true;
+        GP.TRACKING_TOOL_TIP = false;
         //
         final ExampleForm ef = new ExampleForm();
         ef.setVisible(true);

@@ -81,6 +81,7 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import sql.SqlBasicLocal;
 
 /**
  *
@@ -1339,6 +1340,7 @@ public class HelpA {
      * @param jcomboAutoFill specifies if the JCombobox should use auto fill
      * feature
      * @return
+     * @deprecated 
      */
     public static JComboBox fillComboBox(SqlBasicLocal sql, JComboBox jbox, String query,
             Object initialValue, boolean showMultipleValues, boolean fakeValue, boolean jcomboAutoFill) {
@@ -1516,6 +1518,11 @@ public class HelpA {
         }
     }
 
+    /**
+     * @deprecated 
+     * @param box
+     * @return 
+     */
     public static String getComboBoxSelectedValue(JComboBox box) {
         Object val = box.getSelectedItem();
         //
