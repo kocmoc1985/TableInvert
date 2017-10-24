@@ -10,9 +10,15 @@ import MyObjectTable.TableRow;
 import supplementary.HelpA;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Set;
+import java.util.TimeZone;
 import sql.SqlBasicLocal;
 
 /**
@@ -69,7 +75,14 @@ public class TableBuilderInvert {
             //
             while (rs.next()) {
                 //
-                String value = rs.getString(orig_field_name);
+                String value;
+                //
+                try {
+                    Timestamp t = rs.getTimestamp(orig_field_name);
+                    value = "" + millisToDefaultDate(t.getTime());
+                } catch (Exception ex) {
+                    value = rs.getString(orig_field_name);
+                }
                 //
                 //
                 ColumnDataEntryInvert cde;
@@ -97,7 +110,7 @@ public class TableBuilderInvert {
         }
         //
         //
-        int[] arr = {25, 25, 25, 25};
+//        int[] arr = {25, 25, 25, 25};
         //
 //        TableInvert table = new TableInvert(tableData, TableRow.FLOW_LAYOUT, 45, arr, TABLE_NAME);
         TableInvert table = new TableInvert(tableData, TableRow.GRID_LAYOUT, 45, null, TABLE_NAME);
@@ -107,6 +120,24 @@ public class TableBuilderInvert {
         HelpA.setTrackingToolTip(table, query);
         //
         return table;
+    }
+    
+    private String millisToDefaultDate(long millis) {
+        TimeZone tz = TimeZone.getDefault();
+        Calendar cal = Calendar.getInstance(tz);
+        //
+        int style = 3;
+        //
+        Locale locale = Locale.getDefault();
+        //
+        if(locale == Locale.GERMAN || locale == Locale.GERMANY || locale.getCountry().equals("CH")){
+            style = 2;
+        }
+        //
+        DateFormat f1 = DateFormat.getDateInstance(style);
+        cal.setTimeInMillis(millis);
+        Date d = cal.getTime();
+        return f1.format(d);
     }
     
     public HashMap<String, Object> getDefaultRowComponents() {

@@ -4,14 +4,12 @@
  */
 package Examples;
 
-import MyObjectTableInvert.JButtonSave;
 import MyObjectTableInvert.JButtonSaveB;
 import MyObjectTableInvert.TableInvertUser;
 import MyObjectTableInvert.RowDataInvert;
 import MyObjectTableInvert.SaveIndicator;
 import MyObjectTableInvert.TableBuilderInvert;
 import MyObjectTableInvert.TableInvert;
-import java.awt.BorderLayout;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
