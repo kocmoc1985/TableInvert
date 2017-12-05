@@ -9,22 +9,18 @@ import static net.sf.dynamicreports.report.builder.DynamicReports.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
 import net.sf.dynamicreports.examples.Templates;
-import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 //import net.sf.dynamicreports.examples.Templates;
 import net.sf.dynamicreports.report.builder.FieldBuilder;
 import net.sf.dynamicreports.report.builder.column.ComponentColumnBuilder;
 import net.sf.dynamicreports.report.builder.component.VerticalListBuilder;
 import net.sf.dynamicreports.report.builder.style.StyleBuilder;
-import net.sf.dynamicreports.report.builder.subtotal.AggregationSubtotalBuilder;
 import net.sf.dynamicreports.report.constant.HorizontalAlignment;
 import net.sf.dynamicreports.report.constant.PageType;
 import net.sf.dynamicreports.report.constant.VerticalAlignment;
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.view.JasperViewer;
 
 /**
  * @author Ricardo Mariaca (r.mariaca@dynamicreports.org)
@@ -134,10 +130,12 @@ public class TableInvertBasicRepport {
             //
             for (int i = 0; i < tableRowsList.size(); i++) {
                 InvertTableRow row = tableRowsList.get(i);
+                //
                 try {
                     values[i] = row.getValue(x);
                 } catch (Exception ex) {
-                    return dataSource;
+                    values[i] = "*VALUE MISSING*";
+//                    return dataSource;
                 }
             }
             //
