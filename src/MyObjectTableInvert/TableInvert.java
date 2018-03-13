@@ -19,6 +19,7 @@ import java.awt.GridLayout;
 import java.awt.event.ComponentEvent;
 import java.io.File;
 import java.io.IOException;
+import java.sql.DataTruncation;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -377,7 +378,7 @@ public  class TableInvert extends Table implements ControlsActionsIF {
         //
     }
 
-    private void updateFieldString(String tableName,
+    private boolean updateFieldString(String tableName,
             String columnName,
             String value,
             String keyName,
@@ -389,9 +390,13 @@ public  class TableInvert extends Table implements ControlsActionsIF {
             //
             SqlBasicLocal sql = getSql();
             //
-            sql.prepareStatement("UPDATE " + tableName
+            String q = "UPDATE " + tableName
                     + " SET [" + columnName + "]=" + "?" + ""
-                    + " WHERE " + keyName + "=" + "?" + "");
+                    + " WHERE " + keyName + "=" + "?" + "";
+            //
+            System.out.println("SQL SAVE TABLE INVERT: " + q);
+            //
+            sql.prepareStatement(q);
             //
             String dateFormat = HelpA.define_date_format(value);
             //
@@ -410,19 +415,26 @@ public  class TableInvert extends Table implements ControlsActionsIF {
             if (keyIsString) {
                 sql.getPreparedStatement().setString(2, db_id);
             } else {
-                sql.getPreparedStatement().setInt(2, Integer.parseInt(db_id));
+                sql.getPreparedStatement().setInt(2, Integer.parseInt(db_id.trim()));
             }
             //
             sql.getPreparedStatement().executeUpdate();
             //
-        } catch (SQLException ex) {
+        } catch (DataTruncation ex) {
+            HelpA.showNotification("Data Truncation Error");
             Logger.getLogger(TableInvert.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } catch (SQLException ex) {
+            HelpA.showNotification("SQL Error");
+            Logger.getLogger(TableInvert.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
+        //
+        return true;
 
 //        return "UPDATE " + tableName
 //                + " SET [" + columnName + "]=" + value + ""
 //                + " WHERE " + keyName + "=" + db_id + "";
-
     }
 
     private boolean columnNameExists(String rowName, int colNr) {
