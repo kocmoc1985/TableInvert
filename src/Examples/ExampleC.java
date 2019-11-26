@@ -113,14 +113,12 @@ public class ExampleC implements TableInvertUser, TableRowInvertListener {
         //
         String q_6 = SQL_Q.basic_combobox_query("duration", "main_table");
         RowDataInvert duration = new RowDataInvert(RowDataInvert.TYPE_JCOMBOBOX, q_6, sql, "", "main_table", "batch_id", false, "duration", "DURATION", "", true, true, false);
-        duration.enableJComboAutoFill();
         //
         //Using Image example
         JPanelImg image = HelpA.getImageForTableInvert(images.IconUrls.PRE_ADD);
         //
         String q_7 = SQL_Q.basic_combobox_query("duration", "main_table");
         RowDataInvert datum = new RowDataInvert(RowDataInvert.TYPE_JCOMBOBOX, q_7, sql, "", "main_table", "batch_id", false, "datum", "DATUM",image, true, true, false);
-        duration.enableJComboAutoFill();
         //
         RowDataInvert[] rows = {order,batch, recipe,line,duration,datum};
         //

@@ -2005,4 +2005,10 @@ public class HelpA {
             java.util.logging.Logger.getLogger(HelpA.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
+    
+     public static String[] extract_comma_separated_values(String str){
+        str = str.trim();
+        String[]arr = str.split(",");
+        return arr;
+    }
 }

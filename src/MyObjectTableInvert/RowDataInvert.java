@@ -45,7 +45,7 @@ public class RowDataInvert extends RowData {
     private boolean JTextFieldToolTipText = false;
     private boolean comboBoxMultipleValue = false;
     private boolean fakeValue = false;
-    private boolean jComboAutoFill = false;
+    private boolean comboBoxFixedValue;
 
     /**
      *
@@ -125,8 +125,8 @@ public class RowDataInvert extends RowData {
         this.important = important;
     }
 
-    public void enableJComboAutoFill() {
-        this.jComboAutoFill = true;
+      public void enableFixedValues() {
+        comboBoxFixedValue = true;
     }
 
     public void enableFakeValue() {
@@ -182,18 +182,17 @@ public class RowDataInvert extends RowData {
             });
 
             if (comboBoxMultipleValue) {
-//                jcb = (JComboBoxInvert) HelpA.fillComboBox(sql, jcb, additionalInfo, value, true, false,jComboAutoFill);
                 jcb.fillComboBox(sql, jcb, additionalInfo, value, true, false);
             } else if (fakeValue) {
                 jcb.fillComboBox(sql, jcb, additionalInfo, value, false, true);
-//                jcb = (JComboBoxInvert) HelpA.fillComboBox(sql, jcb, additionalInfo, value, false, true,jComboAutoFill);
+            }else if (comboBoxFixedValue) {
+                String comboboxValues[] = HelpA.extract_comma_separated_values(additionalInfo);
+                jcb = (JComboBoxInvert) HelpA.fillComboBox(jcb, comboboxValues, value);
             } else {
                 jcb.fillComboBox(sql, jcb, additionalInfo, value, false, false);
-//                jcb = (JComboBoxInvert) HelpA.fillComboBox(sql, jcb, additionalInfo, value, false, false,jComboAutoFill);
-//                jcb = (JComboBoxInvert)HelpA.fillComboBox_no_autofill(sql, jcb, additionalInfo, value);
             }
             //
-            return jcb;
+            return (JComboBoxInvert)jcb;
             //
         } else if (type == TYPE_JBUTTON) {
         } else if (type == TYPE_JLABEL) {

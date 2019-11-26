@@ -101,8 +101,12 @@ public class ExampleB implements TableInvertUser {
         duration.enableToolTipTextJTextField();
         duration.enableFakeValue();
         //
-        String q_6 = SQL_Q.basic_combobox_query("recipe_id", "main_table");
-        RowDataInvert recipe2 = new RowDataInvert(RowDataInvert.TYPE_JCOMBOBOX, q_6, sql, "", "main_table", "batch_id", false, "recipe_id", "RECIPE", "", true, true, false);
+//        String q_6 = SQL_Q.basic_combobox_query("recipe_id", "main_table");
+//        RowDataInvert recipe2 = new RowDataInvert(RowDataInvert.TYPE_JCOMBOBOX, q_6, sql, "", "main_table", "batch_id", false, "recipe_id", "RECIPE", "", true, true, false);
+        //
+        String fixedComboValues = "FIXED A, FIXED B, FIXED C, FIXED D, FIXED E";
+        RowDataInvert recipe_fixed_3 = new RowDataInvert(RowDataInvert.TYPE_JCOMBOBOX, fixedComboValues, null, "", "main_table", "batch_id", false, "recipe_id", "RECIPE_FIXED_!", "", true, true, false);
+        recipe_fixed_3.enableFixedValues();
         //
         String q_5 = SQL_Q.basic_combobox_query_double_param("recipe_id", "batch_id", "main_table");
         RowDataInvert line = new RowDataInvert(RowDataInvert.TYPE_JCOMBOBOX, q_5, sql, "", "main_table", "batch_id", false, "line_nr", "LINE", "", true, true, false);
@@ -114,7 +118,7 @@ public class ExampleB implements TableInvertUser {
         updated_on.setUneditable();
         updated_by.setUneditable();
         //
-        RowDataInvert[] rows = {order,recipe2, duration, line,updated_on,updated_by};
+        RowDataInvert[] rows = {order,recipe_fixed_3, duration, line,updated_on,updated_by};
         //
         return rows;
     }
@@ -138,6 +142,7 @@ public class ExampleB implements TableInvertUser {
         TABLE_INVERT.setMargin(10, 0, 0, 0);
         //
         TABLE_INVERT.showTableInvert(TABLE_INVERT_CONTAINER);
+        //
     }
 
     public static void main(String[] args) {
